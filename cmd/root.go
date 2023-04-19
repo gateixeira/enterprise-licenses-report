@@ -19,9 +19,8 @@ const (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "github-licenses-report",
-	Short: "Helper Application to prepare for GEI Migration",
-	Long: `This CLI application helps to prepare for GEI Migration.
-	It can be used to change the visibility of repositories, change GHAS settings for an organization and more.`,
+	Short: "Helper tool to generate a report of licenses consumption for a GitHub Enterprise",
+	//Long: ``,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
