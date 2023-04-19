@@ -17,6 +17,8 @@ $ ./github-licenses-report generate-report --enterprise <enterprise_slug> --toke
 
 ### Output
 
+![image](https://user-images.githubusercontent.com/4645845/233187321-99bfb6c6-1c67-440f-936b-e68992a5d482.png)
+
 ## Development
 
 ### Requirements
