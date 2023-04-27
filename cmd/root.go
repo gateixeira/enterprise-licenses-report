@@ -12,8 +12,10 @@ import (
 const VERSION = "0.1.0"
 
 const (
-	enterpriseFlagName  = "enterprise"
-	tokenFlagName		= "token"
+	enterpriseFlagName   = "enterprise"
+	tokenFlagName        = "token"
+	organizationFlagName = "organization"
+	repositoryFlagName   = "repository"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -45,6 +47,10 @@ func init() {
 
 	rootCmd.PersistentFlags().String(tokenFlagName, "", "The authentication token.")
 	rootCmd.MarkFlagRequired(tokenFlagName)
+
+	rootCmd.PersistentFlags().String(organizationFlagName, "", "The organization slug.")
+	rootCmd.MarkFlagRequired(organizationFlagName)
+
+	rootCmd.PersistentFlags().String(repositoryFlagName, "", "The repository slug.")
+	rootCmd.MarkFlagRequired(repositoryFlagName)
 }
-
-

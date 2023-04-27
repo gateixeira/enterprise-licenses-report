@@ -4,8 +4,10 @@ Package cmd provides a command-line interface for changing GHAS settings for a g
 package cmd
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -14,8 +16,8 @@ import (
 )
 
 type LicenseReport struct {
-    ConsumedLicenses github.ConsumedLicenses `json:"consumed_licenses"`
-    Date string `json:"date"`
+	ConsumedLicenses github.ConsumedLicenses `json:"consumed_licenses"`
+	Date             string                  `json:"date"`
 }
 
 // migrateOrgCmd represents the migrateOrg command
@@ -35,15 +37,17 @@ var migrateOrgCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		enterprise, _ := cmd.Flags().GetString(enterpriseFlagName)
 		token, _ := cmd.Flags().GetString(tokenFlagName)
+		organization, _ := cmd.Flags().GetString(organizationFlagName)
+		repository, _ := cmd.Flags().GetString(repositoryFlagName)
 
 		licenses := github.GetConsumedLicenses(enterprise, token)
 
 		report := LicenseReport{
-			Date: time.Now().Format("2006-01-02"),
+			Date:             time.Now().Format("2006-01-02"),
 			ConsumedLicenses: *licenses,
 		}
 
-		fileContent, err := ReadFile("reports.json")
+		fileContent, err := github.ReadFile(organization, repository, "reports.json", token)
 		if err != nil {
 			fmt.Println("Error reading file")
 			os.Exit(1)
@@ -55,12 +59,13 @@ var migrateOrgCmd = &cobra.Command{
 		reports = append(reports, report)
 
 		jsonContent, err := json.Marshal(reports)
+
 		if err != nil {
 			fmt.Println("Error marshalling JSON")
 			os.Exit(1)
 		}
 
-		err = WriteFile("reports.json", jsonContent)
+		err = github.UpdateFile(organization, repository, "reports.json", token, jsonContent, "Update reports.json")
 		if err != nil {
 			fmt.Println("Error writing file")
 			os.Exit(1)
@@ -85,6 +90,23 @@ var migrateOrgCmd = &cobra.Command{
 
 		GenerateChart(enterprise, dates, yAxis, yAxis2)
 
+		file, err := os.Open("report.html")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer file.Close()
+
+		buffer := bufio.NewReader(file)
+		fileInfo, _ := file.Stat()
+		var size int64 = fileInfo.Size()
+		bytes := make([]byte, size)
+		buffer.Read(bytes)
+
+		err = github.UpdateFile(organization, repository, "report.html", token, bytes, "Update report.html")
+		if err != nil {
+			fmt.Println("Error writing file")
+			os.Exit(1)
+		}
 	},
 }
 
