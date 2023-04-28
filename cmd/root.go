@@ -20,7 +20,7 @@ const (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "github-licenses-report",
+	Use:   "enterprise-licenses-report",
 	Short: "Helper tool to generate a report of licenses consumption for a GitHub Enterprise",
 	//Long: ``,
 	// Uncomment the following line if your bare application

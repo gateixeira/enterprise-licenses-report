@@ -6,13 +6,13 @@ Helper tool to generate a report of licenses consumption for a GitHub Enterprise
 
 Run the tool via command line:
 ```
-$ ./github-licenses-report --help
+$ ./enterprise-licenses-report --help
 ```
 
 ### Example
 
 ```
-$ ./github-licenses-report generate-report --enterprise <enterprise_slug> --token <source_token>
+$ ./enterprise-licenses-report generate-report --enterprise <enterprise_slug> --token <source_token>
 ```
 
 ### Output

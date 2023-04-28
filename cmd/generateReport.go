@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gateixeira/github-licenses-report/cmd/github"
+	"github.com/gateixeira/enterprise-licenses-report/cmd/github"
 	"github.com/spf13/cobra"
 )
 
@@ -32,7 +32,7 @@ var migrateOrgCmd = &cobra.Command{
 	
 	Example:
 	
-	./github-licenses-report generate-report --enterprise <enterprise_slug> --token <source_token>`,
+	./enterprise-licenses-report generate-report --enterprise <enterprise_slug> --token <source_token>`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		enterprise, _ := cmd.Flags().GetString(enterpriseFlagName)

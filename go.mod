@@ -1,4 +1,4 @@
-module github.com/gateixeira/github-licenses-report
+module github.com/gateixeira/enterprise-licenses-report
 
 go 1.20
 
