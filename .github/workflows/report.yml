@@ -1,0 +1,26 @@
+name: "Generate Licenses Report"
+on:
+  schedule:
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Generate Report
+        uses: ./
+        env:
+          GITHUB_ENTERPRISE_SLUG: "gateixeira-enterprise"
+          GITHUB_PAT: ${{ secrets.PAT }}
+      - name: Upload HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: Upload Report
+          path: ${{ github.workspace }}/*.html
+          if-no-files-found: error
