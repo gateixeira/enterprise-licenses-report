@@ -1,4 +1,4 @@
-# GitHub Licenses Report
+# Enterprise Licenses Report
 
 Helper tool to generate a report of licenses consumption for a GitHub Enterprise.
 
