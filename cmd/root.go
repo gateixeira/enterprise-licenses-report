@@ -4,6 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	_ "embed"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -17,6 +18,9 @@ const (
 	organizationFlagName = "organization"
 	repositoryFlagName   = "repository"
 )
+
+//go:embed banner.txt
+var banner []byte
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -38,6 +42,11 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.SetOut(os.Stdout)
+	rootCmd.SetErr(os.Stderr)
+	rootCmd.Version = VERSION
+	rootCmd.Println("\n\n" + string(banner) + "\n\n")
+
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.

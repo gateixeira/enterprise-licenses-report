@@ -28,7 +28,7 @@ Or set it up as an Action workflow:
 
 ```yml
 - name: Generate Report
-  uses: ./
+  uses: gateixeira/enterprise-licenses-report@main
   env:
     GITHUB_ENTERPRISE_SLUG: "<enterprise_slug>"
     GITHUB_PAT: ${{ secrets.PAT }}
