@@ -3,7 +3,7 @@ module github.com/gateixeira/enterprise-licenses-report
 go 1.20
 
 require (
-	github.com/go-echarts/go-echarts/v2 v2.2.6
+	github.com/go-echarts/go-echarts/v2 v2.3.0
 	github.com/spf13/cobra v1.7.0
 )
 
